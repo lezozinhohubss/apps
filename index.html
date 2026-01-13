@@ -6,40 +6,37 @@
 
 <style>
 * {
-    margin: 0;
-    padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Arial, sans-serif;
+    font-family: "Segoe UI", Arial, sans-serif;
 }
 
 body {
+    margin: 0;
     height: 100vh;
-    background: radial-gradient(circle at top, #0f2027, #000);
+    background: linear-gradient(135deg, #06141b, #000);
     color: #fff;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-/* ===== LOGIN ===== */
-.login-box {
-    background: rgba(20, 20, 20, 0.85);
-    border: 1px solid #00ffcc;
-    box-shadow: 0 0 25px #00ffcc55;
-    padding: 35px;
+/* LOGIN */
+#loginBox {
     width: 340px;
+    padding: 35px;
+    background: rgba(10,10,10,0.9);
     border-radius: 12px;
+    border: 1px solid #00ffd5;
+    box-shadow: 0 0 30px #00ffd555;
     text-align: center;
-    animation: fade 0.8s ease;
 }
 
-.login-box h1 {
-    font-size: 22px;
+#loginBox h1 {
+    color: #00ffd5;
     margin-bottom: 20px;
-    color: #00ffcc;
 }
 
-.login-box input {
+input {
     width: 100%;
     padding: 12px;
     margin: 10px 0;
@@ -50,77 +47,87 @@ body {
     color: #fff;
 }
 
-.login-box button {
+button {
     width: 100%;
     padding: 12px;
     margin-top: 15px;
     border: none;
     border-radius: 6px;
-    background: linear-gradient(135deg, #00ffcc, #00ccff);
+    background: linear-gradient(135deg, #00ffd5, #00aaff);
     font-weight: bold;
     cursor: pointer;
 }
 
-.error {
-    margin-top: 12px;
-    color: #ff4d4d;
+#error {
+    margin-top: 10px;
+    color: #ff5555;
 }
 
-/* ===== PAINEL ===== */
-.panel {
+/* PAINEL */
+#panel {
     display: none;
-    width: 600px;
-    background: rgba(15, 15, 15, 0.95);
+    width: 700px;
+    background: rgba(5,5,5,0.95);
     border-radius: 14px;
-    box-shadow: 0 0 30px #00ffcc55;
+    box-shadow: 0 0 35px #00ffd555;
     overflow: hidden;
 }
 
-.panel-header {
-    padding: 20px;
+.header {
     background: #000;
-    border-bottom: 1px solid #00ffcc;
+    padding: 20px;
     text-align: center;
+    border-bottom: 1px solid #00ffd5;
 }
 
-.panel-header h2 {
-    color: #00ffcc;
+.header h2 {
+    color: #00ffd5;
+    margin: 0;
 }
 
-.panel-body {
+/* MENU */
+.menu {
+    display: flex;
+    background: #050505;
+    border-bottom: 1px solid #00ffd5;
+}
+
+.menu button {
+    flex: 1;
+    padding: 14px;
+    background: none;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.menu button:hover,
+.menu button.active {
+    background: #00ffd5;
+    color: #000;
+}
+
+/* CONTEÚDO */
+.content {
     padding: 25px;
 }
 
-.tab {
-    background: #00ffcc;
-    color: #000;
-    display: inline-block;
-    padding: 10px 18px;
-    border-radius: 20px;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-
-.info {
-    background: #0a0a0a;
-    border-left: 4px solid #00ffcc;
+.box {
+    background: #0b0b0b;
     padding: 20px;
+    border-left: 4px solid #00ffd5;
     border-radius: 8px;
-    line-height: 1.6;
+    line-height: 1.7;
 }
 
-.info a {
+.box a {
     color: #00ccff;
     text-decoration: none;
 }
 
-.info a:hover {
+.box a:hover {
     text-decoration: underline;
-}
-
-@keyframes fade {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
 }
 </style>
 </head>
@@ -128,24 +135,26 @@ body {
 <body>
 
 <!-- LOGIN -->
-<div class="login-box" id="login">
-    <h1>777 VIP – BOOSTER</h1>
-    <input type="text" id="user" placeholder="Usuário">
-    <input type="password" id="pass" placeholder="Senha">
+<div id="loginBox">
+    <h1>777 VIP - BOOSTER</h1>
+    <input id="user" type="text" placeholder="Usuário">
+    <input id="pass" type="password" placeholder="Senha">
     <button onclick="login()">ENTRAR</button>
-    <div class="error" id="msg"></div>
+    <div id="error"></div>
 </div>
 
 <!-- PAINEL -->
-<div class="panel" id="panel">
-    <div class="panel-header">
-        <h2>Bem-vindo ao 777 VIP – BOOSTER</h2>
+<div id="panel">
+    <div class="header">
+        <h2>777 VIP - BOOSTER</h2>
     </div>
 
-    <div class="panel-body">
-        <div class="tab">🎯 Aimbot 777</div>
+    <div class="menu">
+        <button class="active" onclick="openTab('aimbot', this)">🎯 Aimbot 777</button>
+    </div>
 
-        <div class="info">
+    <div class="content">
+        <div id="aimbot" class="box">
             <p><strong>📥 Link de download do aimbot:</strong><br>
                 <a href="https://www.mediafire.com/file/xwniycdy4d3gmda/v2.rar/file" target="_blank">
                     Clique aqui para baixar
@@ -160,8 +169,8 @@ body {
                 123
             </p>
 
-            <p style="margin-top:15px; color:#00ffcc;">
-                Use com responsabilidade. Conteúdo exclusivo para membros VIP.
+            <p style="margin-top:15px;color:#00ffd5;">
+                Conteúdo exclusivo para membros 777 VIP – BOOSTER.
             </p>
         </div>
     </div>
@@ -171,14 +180,18 @@ body {
 function login() {
     const u = document.getElementById("user").value;
     const p = document.getElementById("pass").value;
-    const msg = document.getElementById("msg");
 
     if (u === "777aps" && p === "777notopo") {
-        document.getElementById("login").style.display = "none";
+        document.getElementById("loginBox").style.display = "none";
         document.getElementById("panel").style.display = "block";
     } else {
-        msg.innerText = "Usuário ou senha incorretos";
+        document.getElementById("error").innerText = "Usuário ou senha incorretos";
     }
+}
+
+function openTab(id, btn) {
+    document.querySelectorAll(".menu button").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
 }
 </script>
 
