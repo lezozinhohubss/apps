@@ -1,18 +1,113 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
-  <title>Login</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>Gerador de Senhas - Demo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #0f172a;
+      color: #e5e7eb;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background: #020617;
+      padding: 20px;
+      border-radius: 10px;
+      width: 320px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 18px;
+      margin-bottom: 15px;
+    }
+
+    label {
+      font-size: 14px;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      border: none;
+    }
+
+    button {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border: none;
+      border-radius: 5px;
+      background: #2563eb;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    .password-box {
+      display: flex;
+      gap: 5px;
+      margin-top: 10px;
+    }
+
+    .password-box input {
+      flex: 1;
+    }
+
+    .note {
+      font-size: 12px;
+      margin-top: 10px;
+      color: #9ca3af;
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
+  <div class="container">
+    <h1>Gerador de Senha (Demo)</h1>
 
-<h2>Login</h2>
+    <label>Digite o nome de usuário:</label>
+    <input type="text" id="username" placeholder="ex: usuario123">
 
-<input id="email" placeholder="Email">
-<input id="password" type="password" placeholder="Senha">
-<button onclick="login()">Entrar</button>
+    <button onclick="gerarSenha()">Gerar senha</button>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-<script src="auth.js"></script>
+    <div class="password-box">
+      <input type="password" id="senha" placeholder="Senha gerada" readonly>
+      <button onclick="toggleSenha()">👁</button>
+    </div>
+
+    <div class="note">
+      Apenas para estudo e demonstração de HTML/JavaScript.
+    </div>
+  </div>
+
+  <script>
+    function gerarSenha() {
+      const chars =
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%";
+      let senha = "";
+      for (let i = 0; i < 12; i++) {
+        senha += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      document.getElementById("senha").value = senha;
+    }
+
+    function toggleSenha() {
+      const input = document.getElementById("senha");
+      input.type = input.type === "password" ? "text" : "password";
+    }
+  </script>
 </body>
 </html>
